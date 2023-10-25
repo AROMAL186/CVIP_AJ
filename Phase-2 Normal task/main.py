@@ -12,7 +12,6 @@ def main():
 
     # Display the random sentence to the user
     print("\n" + random_sentence + "\n")
-    print("Please type the above sentence exactly as it appears and press enter: ")
     time.sleep(5)
 
     # Calculate typing speed
