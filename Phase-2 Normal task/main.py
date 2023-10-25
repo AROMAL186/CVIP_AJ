@@ -6,29 +6,36 @@ def main():
     # Read the file content
     content = file.read()
 
-    # Get the random sentence from the content
+    # Split the content into sentences
     sentences = content.split('.')
-    random_sentence = random.choice(sentences)
 
-    # Display the random sentence to the user
-    print("\n" + random_sentence + "\n")
+    # Filter out sentences with less than 10 words
+    long_sentences = [sentence for sentence in sentences if len(sentence.split()) >= 10]
+
+    # Randomly select a sentence from the long sentences
+    random_sentence = random.choice(long_sentences)
+
+    # Display the sentence to the user
+    print(random_sentence)
+
     time.sleep(5)
 
-    # Calculate typing speed
+    # Start the timer
     start_time = time.time()
-    user_input = input("Time's up! Please type the above sentence again and press enter: ")
+
+    # Get the user's input
+    user_input = input("Type the sentence and press enter: ")
+
+    # Stop the timer
     end_time = time.time()
 
-    total_typing_time = end_time - start_time
-    typing_speed = len(random_sentence.split()) / total_typing_time / 60
+    # Calculate the typing speed and accuracy
+    typing_speed = len(random_sentence.split()) / (end_time - start_time) / 60
+    accuracy = len([char for char in user_input if char in random_sentence]) / len(random_sentence)
 
-    # Calculate accuracy
-    correct_input = random_sentence
-    user_accuracy = len([char for char in user_input if char in correct_input]) / len(correct_input)
-
-    # Display results
-    print("\nTyping speed: {:.2f} WPM".format(typing_speed))
-    print("Accuracy: {:.2f}%".format(user_accuracy * 100))
+    # Display the results to the user
+    print("Your typing speed is {} words per minute.".format(typing_speed))
+    print("Your accuracy is {}%.".format(accuracy * 100))
 
 if __name__ == "__main__":
     main()
